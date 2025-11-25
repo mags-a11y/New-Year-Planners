@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Work Wise ADHD: Yearly Goals &amp; Resolutions</title>
+<style>
+  :root{
+    --purple:#4c2e91;
+    --orange:#f15a29;
+    --blue:#2ca8e0;
+    --green:#6eb92b;
+    --ink:#222;
+    --paper:#ffffff;
+    --box:#f5f5f8;
+  }
+  html,body{height:100%;}
+  body{margin:0;font-family:Helvetica,Arial,sans-serif;background:var(--paper);color:var(--ink);}
+
+  .header{
+    display:flex;align-items:center;gap:16px;padding:14px 26px;flex-wrap:wrap;
+    background:linear-gradient(to right,var(--purple),var(--orange),var(--blue),var(--green));
+    color:#fff;
+  }
+  .header__logo{
+    height:96px;width:auto;flex:0 0 auto;border-radius:12px;background:#fff1;border:1px solid #fff4;
+    padding:12px;box-shadow:0 3px 12px rgba(0,0,0,.18);
+  }
+  .header__copy{flex:1 1 320px;}
+  .header__title{margin:0;font-size:30px;font-weight:800;}
+  .header__subtitle{margin:6px 0 0;font-size:16px;line-height:1.5;max-width:640px;}
+
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;padding:14px 26px;}
+  .print-btn,.secondary-btn{
+    padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer;
+    transition:transform .12s ease,filter .12s ease;
+  }
+  .print-btn{background:var(--purple);color:#fff;}
+  .secondary-btn{background:#ddd;color:var(--ink);}
+  .print-btn:hover,.secondary-btn:hover{transform:translateY(-1px);filter:brightness(1.03);}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px 46px;}
+  .description{font-size:16px;color:#4a4a5c;line-height:1.6;margin:0 0 24px;}
+
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;}
+  .grid.full{grid-template-columns:1fr;}
+  @media (max-width:960px){.grid{grid-template-columns:1fr;}}
+
+  .box{background:var(--box);border-radius:14px;padding:16px;border:2px solid transparent;}
+  .box:focus-within{border-color:var(--purple);background:#fff;}
+  .box h2{margin:0 0 8px;font-size:18px;font-weight:800;color:var(--purple);}
+  .box p{margin:0 0 12px;font-size:14px;color:#4a4a5c;}
+
+  .label{display:block;font-weight:800;color:var(--purple);margin:8px 0 6px 2px;}
+  textarea,input[type="text"],input[type="number"],select{
+    width:100%;box-sizing:border-box;border-radius:10px;border:1px solid #d6d6e5;
+    padding:10px;font-size:15px;background:#fff;color:var(--ink);margin-bottom:10px;
+  }
+  textarea{min-height:110px;resize:vertical;}
+  textarea.small{min-height:70px;}
+
+  .three-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;}
+  .micro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;}
+  .wide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+
+  footer{text-align:center;font-size:13px;color:#666;margin:32px 0 0;}
+
+  @media (max-width:720px){
+    .header{flex-direction:column;align-items:center;text-align:center;padding:16px 18px;}
+    .header__logo{margin-bottom:8px;height:84px;}
+    .header__title{font-size:26px;}
+    .header__subtitle{font-size:15px;}
+    .cta-row{flex-direction:column;}
+    .print-btn,.secondary-btn{width:100%;}
+    .wrap{padding:0 18px 38px;}
+  }
+
+  @media print{
+    .cta-row{display:none;}
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .section, .day-card, .box, .card { break-inside: avoid; page-break-inside: avoid; }
+    h1, h2, h3 { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+  <header class="header">
+    <img class="header__logo" src="../files/work-wise-adhd-logo.jpg" alt="Work Wise ADHD logo" onerror="this.style.display='none'" />
+    <div class="header__copy">
+      <h1 class="header__title">Work Wise ADHD: Yearly Goals &amp; Resolutions</h1>
+      <p class="header__subtitle">A one-page annual reset with space for themes, focus areas, measurable goals, and the supports you need to make them real.</p>
+    </div>
+  </header>
+
+  <div class="cta-row">
+    <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+    <button class="secondary-btn" type="button" id="clear-storage-btn">Clear saved entries</button>
+  </div>
+
+  <main class="wrap">
+    <p class="description">Set your North Star, map the few yearly goals that matter, then design the habits, resources, and accountability that keep you moving.</p>
+
+    <section class="grid">
+      <article class="box">
+        <h2>Yearly Theme &amp; Why</h2>
+        <label class="label" for="yearly-word">Word or phrase of the year</label>
+        <input type="text" id="yearly-word" data-storage-key="yearly-word" />
+        <label class="label" for="yearly-why">Why this matters</label>
+        <textarea id="yearly-why" class="small" data-storage-key="yearly-why"></textarea>
+        <label class="label" for="yearly-feelings">How I want to feel</label>
+        <textarea id="yearly-feelings" class="small" data-storage-key="yearly-feelings"></textarea>
+      </article>
+
+      <article class="box">
+        <h2>Support Systems</h2>
+        <p>People, tools, routines, and accommodations that make the goals doable.</p>
+        <label class="label" for="support-people">People / accountability</label>
+        <textarea id="support-people" class="small" data-storage-key="support-people"></textarea>
+        <label class="label" for="support-tools">Tools / templates / automations</label>
+        <textarea id="support-tools" class="small" data-storage-key="support-tools"></textarea>
+        <label class="label" for="support-rhythms">Rhythms (weekly / monthly)</label>
+        <textarea id="support-rhythms" class="small" data-storage-key="support-rhythms"></textarea>
+      </article>
+    </section>
+
+    <section class="grid" style="margin-top:24px;">
+      <article class="box">
+        <h2>Physical</h2>
+        <div class="three-col">
+          <div>
+            <label class="label" for="goal-physical">Goal</label>
+            <textarea id="goal-physical" class="small" data-storage-key="goal-physical"></textarea>
+          </div>
+          <div>
+            <label class="label" for="goal-physical-signal">Success signal / metric</label>
+            <textarea id="goal-physical-signal" class="small" data-storage-key="goal-physical-signal"></textarea>
+          </div>
+          <div>
+            <label class="label" for="goal-physical-step">First tiny step</label>
+            <textarea id="goal-physical-step" class="small" data-storage-key="goal-physical-step"></textarea>
+          </div>
+        </div>
+        <div class="micro-grid">
+          <div>
+            <label class="label" for="goal-physical-checkpoint">Next checkpoint date</label>
+            <input type="text" id="goal-physical-checkpoint" placeholder="e.g., Mar 15" data-storage-key="goal-physical-checkpoint" />
+          </div>
+          <div>
+            <label class="label" for="goal-physical-support">Support / constraints</label>
+            <textarea id="goal-physical-support" class="small" data-storage-key="goal-physical-support"></textarea>
+          </div>
+        </div>
+      </article>
+
+      <article class="box">
+        <h2>Mental / Emotional</h2>
+        <div class="three-col">
+          <div>
+            <label class="label" for="goal-mental">Goal</label>
+            <textarea id="goal-mental" class="small" data-storage-key="goal-mental"></textarea>
+          </div>
+          <div>
+            <label class="label" for="goal-mental-signal">Success signal / metric</label>
+            <textarea id="goal-mental-signal" class="small" data-storage-key="goal-mental-signal"></textarea>
+          </div>
+          <div>
+            <label class="label" for="goal-mental-step">First tiny step</label>
+            <textarea id="goal-mental-step" class="small" data-storage-key="goal-mental-step"></textarea>
+          </div>
+        </div>
+        <div class="micro-grid">
+          <div>
+            <label class="label" for="goal-mental-checkpoint">Next checkpoint date</label>
+            <input type="text" id="goal-mental-checkpoint" placeholder="e.g., May 1" data-storage-key="goal-mental-checkpoint" />
+          </div>
+          <div>
+            <label class="label" for="goal-mental-support">Support / constraints</label>
+            <textarea id="goal-mental-support" class="small" data-storage-key="goal-mental-support"></textarea>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid" style="margin-top:10px;">
+      <article class="box">
+        <h2>Social / Relationships</h2>
+        <div class="three-col">
+          <div>
+            <label class="label" for="goal-social">Goal</label>
+            <textarea id="goal-social" class="small" data-storage-key="goal-social"></textarea>
+          </div>
+          <div>
+            <label class="label" for="goal-social-signal">Success signal / metric</label>
+            <textarea id="goal-social-signal" class="small" data-storage-key="goal-social-signal"></textarea>
+          </div>
+          <div>
+            <label class="label" for="goal-social-step">First tiny step</label>
+            <textarea id="goal-social-step" class="small" data-storage-key="goal-social-step"></textarea>
+          </div>
+        </div>
+        <div class="micro-grid">
+          <div>
+            <label class="label" for="goal-social-checkpoint">Next checkpoint date</label>
+            <input type="text" id="goal-social-checkpoint" placeholder="e.g., Jul 20" data-storage-key="goal-social-checkpoint" />
+          </div>
+          <div>
+            <label class="label" for="goal-social-support">Support / constraints</label>
+            <textarea id="goal-social-support" class="small" data-storage-key="goal-social-support"></textarea>
+          </div>
+        </div>
+      </article>
+
+      <article class="box">
+        <h2>Work / Career</h2>
+        <div class="three-col">
+          <div>
+            <label class="label" for="goal-work">Goal</label>
+            <textarea id="goal-work" class="small" data-storage-key="goal-work"></textarea>
+          </div>
+          <div>
+            <label class="label" for="goal-work-signal">Success signal / metric</label>
+            <textarea id="goal-work-signal" class="small" data-storage-key="goal-work-signal"></textarea>
+          </div>
+          <div>
+            <label class="label" for="goal-work-step">First tiny step</label>
+            <textarea id="goal-work-step" class="small" data-storage-key="goal-work-step"></textarea>
+          </div>
+        </div>
+        <div class="micro-grid">
+          <div>
+            <label class="label" for="goal-work-checkpoint">Next checkpoint date</label>
+            <input type="text" id="goal-work-checkpoint" placeholder="e.g., Sep 1" data-storage-key="goal-work-checkpoint" />
+          </div>
+          <div>
+            <label class="label" for="goal-work-support">Support / constraints</label>
+            <textarea id="goal-work-support" class="small" data-storage-key="goal-work-support"></textarea>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid" style="margin-top:10px;">
+      <article class="box">
+        <h2>Spiritual / Mindfulness</h2>
+        <div class="three-col">
+          <div>
+            <label class="label" for="goal-spiritual">Goal</label>
+            <textarea id="goal-spiritual" class="small" data-storage-key="goal-spiritual"></textarea>
+          </div>
+          <div>
+            <label class="label" for="goal-spiritual-signal">Success signal / metric</label>
+            <textarea id="goal-spiritual-signal" class="small" data-storage-key="goal-spiritual-signal"></textarea>
+          </div>
+          <div>
+            <label class="label" for="goal-spiritual-step">First tiny step</label>
+            <textarea id="goal-spiritual-step" class="small" data-storage-key="goal-spiritual-step"></textarea>
+          </div>
+        </div>
+        <div class="micro-grid">
+          <div>
+            <label class="label" for="goal-spiritual-checkpoint">Next checkpoint date</label>
+            <input type="text" id="goal-spiritual-checkpoint" placeholder="e.g., Nov 1" data-storage-key="goal-spiritual-checkpoint" />
+          </div>
+          <div>
+            <label class="label" for="goal-spiritual-support">Support / constraints</label>
+            <textarea id="goal-spiritual-support" class="small" data-storage-key="goal-spiritual-support"></textarea>
+          </div>
+        </div>
+      </article>
+
+      <article class="box">
+        <h2>Financial</h2>
+        <div class="three-col">
+          <div>
+            <label class="label" for="goal-financial">Goal</label>
+            <textarea id="goal-financial" class="small" data-storage-key="goal-financial"></textarea>
+          </div>
+          <div>
+            <label class="label" for="goal-financial-signal">Success signal / metric</label>
+            <textarea id="goal-financial-signal" class="small" data-storage-key="goal-financial-signal"></textarea>
+          </div>
+          <div>
+            <label class="label" for="goal-financial-step">First tiny step</label>
+            <textarea id="goal-financial-step" class="small" data-storage-key="goal-financial-step"></textarea>
+          </div>
+        </div>
+        <div class="micro-grid">
+          <div>
+            <label class="label" for="goal-financial-checkpoint">Next checkpoint date</label>
+            <input type="text" id="goal-financial-checkpoint" placeholder="e.g., Dec 1" data-storage-key="goal-financial-checkpoint" />
+          </div>
+          <div>
+            <label class="label" for="goal-financial-support">Support / constraints</label>
+            <textarea id="goal-financial-support" class="small" data-storage-key="goal-financial-support"></textarea>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid" style="margin-top:24px;">
+      <article class="box">
+        <h2>Habits &amp; Systems</h2>
+        <p>List habits to pair with goals plus the trigger and reward.</p>
+        <div class="micro-grid">
+          <div>
+            <label class="label" for="habit-1">Habit 1</label>
+            <textarea id="habit-1" class="small" data-storage-key="habit-1"></textarea>
+            <label class="label" for="habit-1-trigger">Trigger</label>
+            <input type="text" id="habit-1-trigger" data-storage-key="habit-1-trigger" />
+          </div>
+          <div>
+            <label class="label" for="habit-2">Habit 2</label>
+            <textarea id="habit-2" class="small" data-storage-key="habit-2"></textarea>
+            <label class="label" for="habit-2-trigger">Trigger</label>
+            <input type="text" id="habit-2-trigger" data-storage-key="habit-2-trigger" />
+          </div>
+          <div>
+            <label class="label" for="habit-3">Habit 3</label>
+            <textarea id="habit-3" class="small" data-storage-key="habit-3"></textarea>
+            <label class="label" for="habit-3-trigger">Trigger</label>
+            <input type="text" id="habit-3-trigger" data-storage-key="habit-3-trigger" />
+          </div>
+        </div>
+      </article>
+
+      <article class="box">
+        <h2>Obstacles &amp; Safeguards</h2>
+        <p>Anticipate friction and pre-plan recovery moves.</p>
+        <label class="label" for="obstacles">Likely obstacles</label>
+        <textarea id="obstacles" data-storage-key="obstacles"></textarea>
+        <label class="label" for="safeguards">Safeguards / if-then plans</label>
+        <textarea id="safeguards" data-storage-key="safeguards"></textarea>
+      </article>
+    </section>
+
+    <section class="box" style="margin-top:24px;">
+      <h2>Quarterly Check-Ins</h2>
+      <p>Pause each quarter to record wins, stuck points, and tweaks.</p>
+      <div class="wide-grid">
+        <div>
+          <label class="label" for="q1-notes">Q1 focus / wins</label>
+          <textarea id="q1-notes" class="small" data-storage-key="q1-notes"></textarea>
+          <label class="label" for="q1-tweaks">Q1 adjustments</label>
+          <textarea id="q1-tweaks" class="small" data-storage-key="q1-tweaks"></textarea>
+        </div>
+        <div>
+          <label class="label" for="q2-notes">Q2 focus / wins</label>
+          <textarea id="q2-notes" class="small" data-storage-key="q2-notes"></textarea>
+          <label class="label" for="q2-tweaks">Q2 adjustments</label>
+          <textarea id="q2-tweaks" class="small" data-storage-key="q2-tweaks"></textarea>
+        </div>
+        <div>
+          <label class="label" for="q3-notes">Q3 focus / wins</label>
+          <textarea id="q3-notes" class="small" data-storage-key="q3-notes"></textarea>
+          <label class="label" for="q3-tweaks">Q3 adjustments</label>
+          <textarea id="q3-tweaks" class="small" data-storage-key="q3-tweaks"></textarea>
+        </div>
+        <div>
+          <label class="label" for="q4-notes">Q4 focus / wins</label>
+          <textarea id="q4-notes" class="small" data-storage-key="q4-notes"></textarea>
+          <label class="label" for="q4-tweaks">Q4 adjustments</label>
+          <textarea id="q4-tweaks" class="small" data-storage-key="q4-tweaks"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" style="margin-top:24px;">
+      <article class="box">
+        <h2>Celebrations &amp; Rituals</h2>
+        <p>Pre-plan how you will mark progress to keep motivation topped up.</p>
+        <label class="label" for="celebrations">Micro and major celebrations</label>
+        <textarea id="celebrations" class="small" data-storage-key="celebrations"></textarea>
+        <label class="label" for="rituals">Weekly or monthly rituals</label>
+        <textarea id="rituals" class="small" data-storage-key="rituals"></textarea>
+      </article>
+
+      <article class="box">
+        <h2>Evidence of Progress</h2>
+        <p>Ways you will notice you are moving forward (beyond metrics).</p>
+        <textarea id="evidence" data-storage-key="evidence" placeholder="e.g., calmer mornings, fewer tabs open, clearer inbox decisions"></textarea>
+      </article>
+    </section>
+
+    <footer>© 2025 Work Wise ADHD · Yearly Goals &amp; Resolutions.</footer>
+  </main>
+
+  <script>
+  (() => {
+    const storagePrefix = 'workwise-adhd:yearly-goals-resolutions:';
+    let storage;
+    try {
+      storage = window.localStorage;
+    } catch (err) {
+      return;
+    }
+    if (!storage) return;
+
+    const fields = document.querySelectorAll('input[type="text"], input[type="number"], textarea, select');
+    fields.forEach((field, index) => {
+      const key = storagePrefix + (field.dataset.storageKey || field.id || field.name || index);
+      const saved = storage.getItem(key);
+      if (saved !== null) field.value = saved;
+      const save = () => storage.setItem(key, field.value);
+      field.addEventListener('input', save);
+      field.addEventListener('change', save);
+    });
+
+    const clearBtn = document.getElementById('clear-storage-btn');
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        if (!confirm('Clear all saved text for this planner?')) return;
+        fields.forEach((field, index) => {
+          const key = storagePrefix + (field.dataset.storageKey || field.id || field.name || index);
+          storage.removeItem(key);
+          if (field.tagName === 'SELECT') field.selectedIndex = 0;
+          else field.value = '';
+        });
+      });
+    }
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Work Wise ADHD: 90-Day Start Plan</title>
+<style>
+  :root{
+    --purple:#4c2e91;
+    --orange:#f15a29;
+    --blue:#2ca8e0;
+    --green:#6eb92b;
+    --ink:#222;
+    --paper:#ffffff;
+    --box:#f5f5f8;
+  }
+  html,body{height:100%;}
+  body{margin:0;font-family:Helvetica,Arial,sans-serif;background:var(--paper);color:var(--ink);}
+
+  .header{
+    display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:14px 26px;
+    background:linear-gradient(to right,var(--purple),var(--orange),var(--blue),var(--green));
+    color:#fff;
+  }
+  .header__logo{
+    height:110px;width:auto;border-radius:12px;background:#fff1;border:1px solid #fff4;padding:12px;
+    box-shadow:0 3px 12px rgba(0,0,0,.18);
+  }
+  .header__copy{flex:1 1 320px;}
+  .header__title{margin:0;font-size:30px;font-weight:800;}
+  .header__subtitle{margin:6px 0 0;font-size:16px;line-height:1.6;max-width:640px;}
+
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;padding:14px 26px;}
+  .btn{
+    padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer;
+    transition:transform .12s ease,filter .12s ease;
+  }
+  .btn-primary{background:var(--purple);color:#fff;}
+  .btn-secondary{background:#ddd;color:var(--ink);}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.03);}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px 46px;}
+  .description{font-size:16px;color:#4a4a5c;line-height:1.6;margin:0 0 22px;}
+
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;}
+  .grid.full{grid-template-columns:1fr;}
+  @media (max-width:960px){.grid{grid-template-columns:1fr;}}
+
+  .box{background:var(--box);border-radius:14px;padding:16px;border:2px solid transparent;}
+  .box:focus-within{border-color:var(--purple);background:#fff;}
+  .box h2{margin:0 0 8px;font-size:18px;font-weight:800;color:var(--purple);}
+  .box p{margin:0 0 12px;font-size:14px;color:#4a4a5c;}
+
+  .label{display:block;font-weight:800;color:var(--purple);margin:8px 0 6px 2px;}
+  textarea,input[type="text"],input[type="number"],select{
+    width:100%;box-sizing:border-box;border-radius:10px;border:1px solid #d6d6e5;
+    padding:10px;font-size:15px;background:#fff;color:var(--ink);margin-bottom:10px;
+  }
+  textarea{min-height:100px;resize:vertical;}
+  textarea.small{min-height:80px;}
+  textarea.large{min-height:150px;}
+
+  .three-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+  .micro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;}
+
+  footer{text-align:center;font-size:13px;color:#666;margin:32px 0 0;}
+
+  @media (max-width:720px){
+    .header{flex-direction:column;align-items:center;text-align:center;padding:16px 18px;}
+    .header__logo{margin-bottom:8px;height:84px;}
+    .header__title{font-size:26px;}
+    .header__subtitle{font-size:15px;}
+    .cta-row{flex-direction:column;}
+    .btn{width:100%;}
+    .wrap{padding:0 18px 38px;}
+  }
+
+  @media print{
+    .cta-row{display:none;}
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .section, .day-card, .box, .card { break-inside: avoid; page-break-inside: avoid; }
+    h1, h2, h3 { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+  <header class="header">
+    <img class="header__logo" src="../files/work-wise-adhd-logo.jpg" alt="Work Wise ADHD logo" onerror="this.style.display='none'" />
+    <div class="header__copy">
+      <h1 class="header__title">Work Wise ADHD: 90-Day Start Plan</h1>
+      <p class="header__subtitle">Get clear on goals, then chunk them into monthly pushes and daily rhythms that fit how your brain works.</p>
+    </div>
+  </header>
+
+  <div class="cta-row">
+    <button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+    <button class="btn btn-secondary" type="button" id="clear-storage-btn">Clear saved entries</button>
+  </div>
+
+  <main class="wrap">
+    <p class="description">Define the 90-day goals, why they matter, and the sprint-sized moves for each month. Keep it visible and update as you ship.</p>
+
+    <section class="grid">
+      <article class="box">
+        <h2>90-Day Goals</h2>
+        <label class="label" for="goal-1">Goal 1 (what will be true)</label>
+        <textarea id="goal-1" class="small" data-storage-key="goal-1"></textarea>
+        <label class="label" for="goal-1-metric">Success metric</label>
+        <input type="text" id="goal-1-metric" data-storage-key="goal-1-metric" />
+        <label class="label" for="goal-1-why">Why it matters</label>
+        <textarea id="goal-1-why" class="small" data-storage-key="goal-1-why"></textarea>
+      </article>
+      <article class="box">
+        <h2>Goal 2</h2>
+        <label class="label" for="goal-2">Goal 2 (what will be true)</label>
+        <textarea id="goal-2" class="small" data-storage-key="goal-2"></textarea>
+        <label class="label" for="goal-2-metric">Success metric</label>
+        <input type="text" id="goal-2-metric" data-storage-key="goal-2-metric" />
+        <label class="label" for="goal-2-why">Why it matters</label>
+        <textarea id="goal-2-why" class="small" data-storage-key="goal-2-why"></textarea>
+      </article>
+    </section>
+
+    <section class="box" style="margin-top:24px;">
+      <h2>Monthly Game Plan</h2>
+      <div class="three-col">
+        <div>
+          <label class="label" for="month-1-focus">Month 1 focus</label>
+          <textarea id="month-1-focus" class="large" data-storage-key="month-1-focus" placeholder="Sprint goals, key deliverables"></textarea>
+          <label class="label" for="month-1-start">First steps</label>
+          <textarea id="month-1-start" class="small" data-storage-key="month-1-start"></textarea>
+        </div>
+        <div>
+          <label class="label" for="month-2-focus">Month 2 focus</label>
+          <textarea id="month-2-focus" class="large" data-storage-key="month-2-focus"></textarea>
+          <label class="label" for="month-2-start">First steps</label>
+          <textarea id="month-2-start" class="small" data-storage-key="month-2-start"></textarea>
+        </div>
+        <div>
+          <label class="label" for="month-3-focus">Month 3 focus</label>
+          <textarea id="month-3-focus" class="large" data-storage-key="month-3-focus"></textarea>
+          <label class="label" for="month-3-start">First steps</label>
+          <textarea id="month-3-start" class="small" data-storage-key="month-3-start"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" style="margin-top:24px;">
+      <article class="box">
+        <h2>Daily Rhythm</h2>
+        <p>Decide the cadence that keeps momentum without overload.</p>
+        <label class="label" for="daily-rituals">Daily rituals</label>
+        <textarea id="daily-rituals" class="large" data-storage-key="daily-rituals" placeholder="e.g., Morning setup, midday check, end-of-day tidy"></textarea>
+        <label class="label" for="time-blocks">Protected time blocks</label>
+        <textarea id="time-blocks" class="large" data-storage-key="time-blocks"></textarea>
+      </article>
+
+      <article class="box">
+        <h2>Resources &amp; Support</h2>
+        <p>People, templates, tools, and accommodations that keep you moving.</p>
+        <textarea id="resources" data-storage-key="resources"></textarea>
+      </article>
+    </section>
+
+    <section class="grid" style="margin-top:24px;">
+      <article class="box">
+        <h2>Risks &amp; Safeguards</h2>
+        <label class="label" for="risks">What could derail this?</label>
+        <textarea id="risks" data-storage-key="risks"></textarea>
+        <label class="label" for="safeguards">If-then plans / recovery moves</label>
+        <textarea id="safeguards" data-storage-key="safeguards"></textarea>
+      </article>
+
+      <article class="box">
+        <h2>Celebrations &amp; Rewards</h2>
+        <label class="label" for="milestones">Milestones to celebrate</label>
+        <textarea id="milestones" class="small" data-storage-key="milestones"></textarea>
+        <label class="label" for="rewards">Rewards that feel good</label>
+        <textarea id="rewards" class="small" data-storage-key="rewards"></textarea>
+      </article>
+    </section>
+
+    <section class="grid" style="margin-top:24px;">
+      <article class="box">
+        <h2>Weekly Check-Ins</h2>
+        <p>Capture quick notes on wins, blockers, and adjustments.</p>
+        <label class="label" for="week-1-notes">Week 1</label>
+        <textarea id="week-1-notes" class="small" data-storage-key="week-1-notes"></textarea>
+        <label class="label" for="week-2-notes">Week 2</label>
+        <textarea id="week-2-notes" class="small" data-storage-key="week-2-notes"></textarea>
+        <label class="label" for="week-3-notes">Week 3</label>
+        <textarea id="week-3-notes" class="small" data-storage-key="week-3-notes"></textarea>
+        <label class="label" for="week-4-notes">Week 4</label>
+        <textarea id="week-4-notes" class="small" data-storage-key="week-4-notes"></textarea>
+      </article>
+
+      <article class="box">
+        <h2>Weekly Check-Ins</h2>
+        <p>Second four-week block for clarity.</p>
+        <label class="label" for="week-5-notes">Week 5</label>
+        <textarea id="week-5-notes" class="small" data-storage-key="week-5-notes"></textarea>
+        <label class="label" for="week-6-notes">Week 6</label>
+        <textarea id="week-6-notes" class="small" data-storage-key="week-6-notes"></textarea>
+        <label class="label" for="week-7-notes">Week 7</label>
+        <textarea id="week-7-notes" class="small" data-storage-key="week-7-notes"></textarea>
+        <label class="label" for="week-8-notes">Week 8</label>
+        <textarea id="week-8-notes" class="small" data-storage-key="week-8-notes"></textarea>
+      </article>
+    </section>
+
+    <section class="grid" style="margin-top:24px;">
+      <article class="box">
+        <h2>Weekly Check-Ins</h2>
+        <p>Final four-week block.</p>
+        <label class="label" for="week-9-notes">Week 9</label>
+        <textarea id="week-9-notes" class="small" data-storage-key="week-9-notes"></textarea>
+        <label class="label" for="week-10-notes">Week 10</label>
+        <textarea id="week-10-notes" class="small" data-storage-key="week-10-notes"></textarea>
+        <label class="label" for="week-11-notes">Week 11</label>
+        <textarea id="week-11-notes" class="small" data-storage-key="week-11-notes"></textarea>
+        <label class="label" for="week-12-notes">Week 12</label>
+        <textarea id="week-12-notes" class="small" data-storage-key="week-12-notes"></textarea>
+      </article>
+
+      <article class="box">
+        <h2>Capacity &amp; Energy Notes</h2>
+        <p>Log patterns that affect focus so you can plan around them.</p>
+        <textarea id="energy-notes" class="large" data-storage-key="energy-notes" placeholder="Sleep, meds, exercise, meetings that drain/charge you"></textarea>
+      </article>
+    </section>
+
+    <footer>© 2025 Work Wise ADHD · 90-Day Start Plan.</footer>
+  </main>
+
+  <script>
+  (() => {
+    const storagePrefix = 'workwise-adhd:90-day-start-plan:';
+    let storage;
+    try {
+      storage = window.localStorage;
+    } catch (err) {
+      return;
+    }
+    if (!storage) return;
+
+    const fields = document.querySelectorAll('input[type="text"], input[type="number"], textarea, select');
+    fields.forEach((field, index) => {
+      const key = storagePrefix + (field.dataset.storageKey || field.id || field.name || index);
+      const saved = storage.getItem(key);
+      if (saved !== null) field.value = saved;
+      const save = () => storage.setItem(key, field.value);
+      field.addEventListener('input', save);
+      field.addEventListener('change', save);
+    });
+
+    const clearBtn = document.getElementById('clear-storage-btn');
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        if (!confirm('Clear all saved text for this planner?')) return;
+        fields.forEach((field, index) => {
+          const key = storagePrefix + (field.dataset.storageKey || field.id || field.name || index);
+          storage.removeItem(key);
+          if (field.tagName === 'SELECT') field.selectedIndex = 0;
+          else field.value = '';
+        });
+      });
+    }
+  })();
+  </script>
+</body>
+</html>

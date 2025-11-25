@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Work Wise ADHD: New Year Planners Guide</title>
+<style>
+  :root{
+    --purple:#4c2e91;
+    --orange:#f15a29;
+    --blue:#2ca8e0;
+    --green:#6eb92b;
+    --ink:#1e1e2a;
+    --paper:#ffffff;
+    --card:#f5f5f9;
+  }
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family:Helvetica,Arial,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .header{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:18px 26px;
+    background:linear-gradient(115deg,var(--purple),var(--orange),var(--blue),var(--green));
+    color:#fff;
+    flex-wrap:wrap;
+    width:100%;
+    box-sizing:border-box;
+  }
+  .header__logo{
+    height:110px;
+    width:auto;
+    flex:0 0 auto;
+    border-radius:12px;
+    background:#fff1;
+    border:1px solid #fff4;
+    padding:12px;
+    box-shadow:0 3px 12px rgba(0,0,0,.18);
+  }
+  .header__title{margin:0;font-size:30px;font-weight:800;}
+  .header__subtitle{margin:6px 0 0;font-size:16px;max-width:560px;line-height:1.5;}
+  .wrap{
+    max-width:980px;
+    margin:32px auto 40px;
+    padding:0 24px 40px;
+    display:grid;
+    gap:24px;
+  }
+  .card{
+    background:var(--card);
+    border-radius:16px;
+    padding:22px;
+    box-shadow:0 6px 20px rgba(60,60,110,.08);
+    border:1px solid rgba(76,46,145,.12);
+  }
+  .card h2{margin:0 0 12px;font-size:20px;font-weight:800;color:var(--purple);}
+  .card p{margin:0 0 12px;line-height:1.6;}
+  .card ul{margin:0 0 12px 20px;line-height:1.6;}
+  .card li{margin-bottom:6px;}
+  .card strong{color:var(--purple);}
+  .file-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:16px;
+    margin-top:18px;
+  }
+  .file-card{
+    background:#fff;
+    border-radius:14px;
+    border:1px solid rgba(76,46,145,.14);
+    padding:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.05);
+  }
+  .file-card h3{margin:0 0 6px;font-size:16px;font-weight:700;}
+  .file-card p{margin:0;font-size:13px;line-height:1.5;}
+  footer{
+    text-align:center;
+    font-size:13px;
+    color:#666;
+    margin:0 auto 36px;
+  }
+  @media (max-width:620px){
+    .header{padding:16px 18px;text-align:center;justify-content:center;}
+    .header__logo{height:96px;margin:0 auto 10px;}
+    .header__title{font-size:26px;text-align:center;}
+    .header__subtitle{font-size:15px;text-align:center;}
+    .wrap{padding:0 18px 32px;}
+    .card{padding:18px;}
+  }
+
+  @media print{
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .card { break-inside: avoid; page-break-inside: avoid; }
+    h1, h2, h3 { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+  <header class="header">
+    <img class="header__logo" src="../files/work-wise-adhd-logo.jpg" alt="Work Wise ADHD logo" onerror="this.style.display='none'" />
+    <div>
+      <h1 class="header__title">New Year Planners Guide</h1>
+      <p class="header__subtitle">How to open, use, and share the Yearly Goals, Yearly Budget, and 90-Day Start Plan in your browser.</p>
+    </div>
+  </header>
+
+  <main class="wrap" aria-label="Planner instructions">
+    <section class="card" aria-label="Quick start">
+      <h2>Quick Start</h2>
+      <ul>
+        <li><strong>Keep the folder together.</strong> The planners load their logo from <code>../files</code>. If you move a planner, move the whole <code>new-year-planners</code> folder (or update the logo path).</li>
+        <li><strong>Open in your browser.</strong> Double-click any planner HTML file (Safari, Chrome, Edge, or Firefox). No extra software required.</li>
+        <li><strong>Type directly into the page.</strong> Fields save automatically to your browser’s local storage as you type.</li>
+        <li><strong>Print or PDF.</strong> Use the <em>Print / Save as PDF</em> button at the top of each planner.</li>
+        <li><strong>Reset if needed.</strong> Use the <em>Clear saved entries</em> button to wipe that planner’s stored data.</li>
+        <li><strong>Stay on the same device.</strong> Saved data stays in the browser you used. Copy anything important before switching devices or browsers.</li>
+      </ul>
+    </section>
+
+    <section class="card" aria-label="What’s inside">
+      <h2>What’s Inside</h2>
+      <div class="file-list">
+        <article class="file-card" aria-label="Yearly Goals & Resolutions overview">
+          <h3>yearly-goals-and-resolutions.html</h3>
+          <p>Annual themes plus domain-based goals (physical, mental, social, work, spiritual, financial), habits, safeguards, quarterly check-ins, and celebration prompts.</p>
+        </article>
+        <article class="file-card" aria-label="Yearly Budget overview">
+          <h3>yearly-budget.html</h3>
+          <p>Annual income, weekly spend envelopes, monthly fixed costs, savings pots, seasonal expenses, money reviews, and rules to keep decisions simple.</p>
+        </article>
+        <article class="file-card" aria-label="90-Day Start Plan overview">
+          <h3>90-day-start-plan.html</h3>
+          <p>90-day goals, monthly focus blocks, daily rhythm, resources, risks, and weekly check-ins grouped into three 4-week blocks.</p>
+        </article>
+        <article class="file-card" aria-label="This guide">
+          <h3>instructions.html</h3>
+          <p>This page. Keep it with the planners so anyone can get oriented quickly.</p>
+        </article>
+      </div>
+      <p>Need to add more planners? Place new HTML files in this folder and they will inherit the shared logo path. Follow the same button pattern for print and clear actions.</p>
+    </section>
+
+    <section class="card" aria-label="Sharing via GitHub">
+      <h2>Sharing via GitHub</h2>
+      <ul>
+        <li><strong>Commit everything in this folder.</strong> Include <code>instructions.html</code> and the three planners.</li>
+        <li><strong>Keep the <code>files</code> folder available.</strong> The logo loads from <code>../files/work-wise-adhd-logo.jpg</code>.</li>
+        <li><strong>Enable GitHub Pages</strong> (optional) on your repo if you want to share a live, read-only view; local storage still saves per visitor.</li>
+        <li><strong>Browser storage stays local.</strong> GitHub hosts the files, but each visitor’s entries remain in their own browser.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Work Wise ADHD · New Year Planners.
+  </footer>
+</body>
+</html>

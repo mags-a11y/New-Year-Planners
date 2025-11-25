@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Work Wise ADHD: Yearly Budget Planner</title>
+<style>
+  :root{
+    --purple:#4c2e91;
+    --orange:#f15a29;
+    --blue:#2ca8e0;
+    --green:#6eb92b;
+    --ink:#222;
+    --paper:#ffffff;
+    --box:#f5f5f8;
+    --line:#e2e2f0;
+  }
+  html,body{height:100%;}
+  body{margin:0;font-family:Helvetica,Arial,sans-serif;background:var(--paper);color:var(--ink);}
+
+  .header{
+    display:flex;flex-wrap:wrap;gap:16px;align-items:center;padding:14px 26px;
+    background:linear-gradient(to right,var(--purple),var(--orange),var(--blue),var(--green));
+    color:#fff;
+  }
+  .header__logo{
+    height:120px;width:auto;border-radius:12px;background:#fff1;border:1px solid #fff4;padding:12px;
+    box-shadow:0 3px 12px rgba(0,0,0,.18);
+  }
+  .header__copy{flex:1 1 360px;}
+  .header__title{margin:0;font-size:30px;font-weight:800;}
+  .header__subtitle{margin:6px 0 0;font-size:16px;line-height:1.6;max-width:640px;}
+
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;padding:14px 26px;}
+  .btn{
+    padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer;
+    transition:transform .12s ease,filter .12s ease;
+  }
+  .btn-primary{background:var(--purple);color:#fff;}
+  .btn-secondary{background:#ddd;color:var(--ink);}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.03);}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px 46px;}
+  .description{font-size:16px;color:#4a4a5c;line-height:1.6;margin:0 0 20px;}
+
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;}
+  .grid.full{grid-template-columns:1fr;}
+  @media (max-width:960px){.grid{grid-template-columns:1fr;}}
+
+  .box{
+    background:var(--box);border-radius:14px;padding:16px;border:2px solid transparent;
+  }
+  .box:focus-within{border-color:var(--purple);background:#fff;}
+  .box h2{margin:0 0 8px;font-size:18px;font-weight:800;color:var(--purple);}
+  .box p{margin:0 0 12px;font-size:14px;color:#4a4a5c;}
+
+  .label{display:block;font-weight:800;color:var(--purple);margin:8px 0 6px 2px;}
+  textarea,input[type="text"],input[type="number"],select{
+    width:100%;box-sizing:border-box;border-radius:10px;border:1px solid #d6d6e5;
+    padding:10px;font-size:15px;background:#fff;color:var(--ink);margin-bottom:10px;
+  }
+  textarea{min-height:90px;resize:vertical;}
+  textarea.small{min-height:70px;}
+  input[type="number"]{text-align:right;}
+
+  table{width:100%;border-collapse:separate;border-spacing:0 10px;}
+  thead th{
+    text-align:left;font-size:12px;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:.04em;padding:0 12px;
+  }
+  tbody tr{background:#fff;box-shadow:0 1px 10px rgba(0,0,0,.05);border-radius:12px;}
+  tbody td{padding:12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  tbody td:first-child{border-left:1px solid var(--line);border-top-left-radius:12px;border-bottom-left-radius:12px;}
+  tbody td:last-child{border-right:1px solid var(--line);border-top-right-radius:12px;border-bottom-right-radius:12px;}
+  tbody input{margin:0;}
+
+  footer{text-align:center;font-size:13px;color:#666;margin:32px 0 0;}
+
+  .table-scroll{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:12px;padding-bottom:4px;}
+  .table-scroll table{min-width:720px;}
+
+  @media (max-width:720px){
+    .header{flex-direction:column;align-items:center;text-align:center;padding:16px 18px;}
+    .header__logo{margin-bottom:8px;height:100px;}
+    .header__title{font-size:26px;}
+    .header__subtitle{font-size:15px;}
+    .cta-row{flex-direction:column;}
+    .btn{width:100%;}
+    .wrap{padding:0 18px 38px;}
+  }
+
+  @media print{
+    .cta-row{display:none;}
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .section, .day-card, .box, .card { break-inside: avoid; page-break-inside: avoid; }
+    h1, h2, h3 { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+  <header class="header">
+    <img class="header__logo" src="../files/work-wise-adhd-logo.jpg" alt="Work Wise ADHD logo" onerror="this.style.display='none'" />
+    <div class="header__copy">
+      <h1 class="header__title">Work Wise ADHD: Yearly Budget Planner</h1>
+      <p class="header__subtitle">Map the year at a glance: income, essentials, savings buckets, and seasonal spikes, so you can adjust month by month without losing the big picture.</p>
+    </div>
+  </header>
+
+  <div class="cta-row">
+    <button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+    <button class="btn btn-secondary" type="button" id="clear-storage-btn">Clear saved entries</button>
+  </div>
+
+  <main class="wrap">
+    <p class="description">Use this to sketch annual numbers, then set the few rules that make daily decisions easier. Reopen any time; your inputs stay saved in this browser.</p>
+
+    <section class="grid">
+      <article class="box">
+        <h2>Planning Context</h2>
+        <label class="label" for="year-focus">Year focus</label>
+        <input type="text" id="year-focus" data-storage-key="year-focus" placeholder="e.g., 2025 refocus, debt clear, pad emergency fund" />
+        <label class="label" for="money-feelings">How I want money to feel</label>
+        <textarea id="money-feelings" class="small" data-storage-key="money-feelings"></textarea>
+        <label class="label" for="money-rules">Simple money rules</label>
+        <textarea id="money-rules" class="small" data-storage-key="money-rules" placeholder="e.g., 20% to savings first, 2x buffer for big trips"></textarea>
+      </article>
+
+      <article class="box">
+        <h2>Savings Targets</h2>
+      <p>Call out your key buckets and target amounts for the year.</p>
+        <div class="grid full">
+          <div>
+            <label class="label" for="savings-1">Savings pot</label>
+            <textarea id="savings-1" class="small" data-storage-key="savings-1" placeholder="Emergency fund £3,000"></textarea>
+          </div>
+          <div>
+            <label class="label" for="savings-2">Savings pot</label>
+            <textarea id="savings-2" class="small" data-storage-key="savings-2"></textarea>
+          </div>
+          <div>
+            <label class="label" for="savings-3">Savings pot</label>
+            <textarea id="savings-3" class="small" data-storage-key="savings-3"></textarea>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="box" style="margin-top:24px;">
+      <h2>Weekly Variable Spend</h2>
+      <p>Groceries, transport, personal, fun—set weekly envelopes.</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Category</th><th>Weekly amount</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><input type="text" id="weekly-1-name" placeholder="Groceries" data-storage-key="weekly-1-name" /></td>
+              <td><input type="number" step="0.01" id="weekly-1-amount" data-storage-key="weekly-1-amount" /></td>
+              <td><input type="text" id="weekly-1-notes" data-storage-key="weekly-1-notes" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="weekly-2-name" placeholder="Transport" data-storage-key="weekly-2-name" /></td>
+              <td><input type="number" step="0.01" id="weekly-2-amount" data-storage-key="weekly-2-amount" /></td>
+              <td><input type="text" id="weekly-2-notes" data-storage-key="weekly-2-notes" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="weekly-3-name" placeholder="Eating out / Fun" data-storage-key="weekly-3-name" /></td>
+              <td><input type="number" step="0.01" id="weekly-3-amount" data-storage-key="weekly-3-amount" /></td>
+              <td><input type="text" id="weekly-3-notes" data-storage-key="weekly-3-notes" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="weekly-4-name" placeholder="Personal / Health" data-storage-key="weekly-4-name" /></td>
+              <td><input type="number" step="0.01" id="weekly-4-amount" data-storage-key="weekly-4-amount" /></td>
+              <td><input type="text" id="weekly-4-notes" data-storage-key="weekly-4-notes" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="box" style="margin-top:24px;">
+      <h2>Monthly Fixed Expenses</h2>
+      <p>Baseline costs that recur every month.</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Category</th><th>Monthly amount</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><input type="text" id="fixed-1-name" placeholder="Rent / Mortgage" data-storage-key="fixed-1-name" /></td>
+              <td><input type="number" step="0.01" id="fixed-1-amount" data-storage-key="fixed-1-amount" /></td>
+              <td><input type="text" id="fixed-1-notes" data-storage-key="fixed-1-notes" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="fixed-2-name" placeholder="Utilities" data-storage-key="fixed-2-name" /></td>
+              <td><input type="number" step="0.01" id="fixed-2-amount" data-storage-key="fixed-2-amount" /></td>
+              <td><input type="text" id="fixed-2-notes" data-storage-key="fixed-2-notes" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="fixed-3-name" placeholder="Internet / Phone" data-storage-key="fixed-3-name" /></td>
+              <td><input type="number" step="0.01" id="fixed-3-amount" data-storage-key="fixed-3-amount" /></td>
+              <td><input type="text" id="fixed-3-notes" data-storage-key="fixed-3-notes" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="fixed-4-name" placeholder="Insurance" data-storage-key="fixed-4-name" /></td>
+              <td><input type="number" step="0.01" id="fixed-4-amount" data-storage-key="fixed-4-amount" /></td>
+              <td><input type="text" id="fixed-4-notes" data-storage-key="fixed-4-notes" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="fixed-5-name" placeholder="Childcare / School" data-storage-key="fixed-5-name" /></td>
+              <td><input type="number" step="0.01" id="fixed-5-amount" data-storage-key="fixed-5-amount" /></td>
+              <td><input type="text" id="fixed-5-notes" data-storage-key="fixed-5-notes" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="box" style="margin-top:24px;">
+      <h2>Annual Income Estimate</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>Expected yearly total</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" id="income-1-name" data-storage-key="income-1-name" /></td>
+              <td><input type="number" step="0.01" id="income-1-amount" data-storage-key="income-1-amount" /></td>
+              <td><input type="text" id="income-1-notes" data-storage-key="income-1-notes" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="income-2-name" data-storage-key="income-2-name" /></td>
+              <td><input type="number" step="0.01" id="income-2-amount" data-storage-key="income-2-amount" /></td>
+              <td><input type="text" id="income-2-notes" data-storage-key="income-2-notes" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="income-3-name" data-storage-key="income-3-name" /></td>
+              <td><input type="number" step="0.01" id="income-3-amount" data-storage-key="income-3-amount" /></td>
+              <td><input type="text" id="income-3-notes" data-storage-key="income-3-notes" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="income-4-name" data-storage-key="income-4-name" /></td>
+              <td><input type="number" step="0.01" id="income-4-amount" data-storage-key="income-4-amount" /></td>
+              <td><input type="text" id="income-4-notes" data-storage-key="income-4-notes" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="income-5-name" data-storage-key="income-5-name" /></td>
+              <td><input type="number" step="0.01" id="income-5-amount" data-storage-key="income-5-amount" /></td>
+              <td><input type="text" id="income-5-notes" data-storage-key="income-5-notes" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="grid" style="margin-top:24px;">
+      <article class="box">
+        <h2>Debts &amp; Paydown Plan</h2>
+        <p>List balances, minimums, and your planned attack order.</p>
+        <textarea id="debts" data-storage-key="debts"></textarea>
+      </article>
+      <article class="box">
+        <h2>Big Purchases to Plan</h2>
+        <p>Gear upgrades, home fixes, medical, certifications.</p>
+        <textarea id="big-purchases" data-storage-key="big-purchases"></textarea>
+      </article>
+    </section>
+
+    <section class="grid" style="margin-top:24px;">
+      <article class="box">
+        <h2>Irregular / Seasonal Expenses</h2>
+        <p>Holidays, insurance renewals, gifts, school terms, travel.</p>
+        <textarea id="seasonal-expenses" data-storage-key="seasonal-expenses"></textarea>
+      </article>
+      <article class="box">
+        <h2>Cashflow Rules</h2>
+        <p>e.g., pay yourself first, weekly money check, auto transfers.</p>
+        <textarea id="cashflow-rules" data-storage-key="cashflow-rules"></textarea>
+      </article>
+    </section>
+
+    <section class="grid" style="margin-top:24px;">
+      <article class="box">
+        <h2>Monthly Money Review</h2>
+        <p>Use the same prompts each month to spot trends.</p>
+        <label class="label" for="monthly-wins">Wins / what worked</label>
+        <textarea id="monthly-wins" class="small" data-storage-key="monthly-wins"></textarea>
+        <label class="label" for="monthly-shifts">Shifts to make next month</label>
+        <textarea id="monthly-shifts" class="small" data-storage-key="monthly-shifts"></textarea>
+      </article>
+
+      <article class="box">
+        <h2>Weekly Money Check</h2>
+        <p>Quick reset to stay on track.</p>
+        <label class="label" for="weekly-check">Notes / actions</label>
+        <textarea id="weekly-check" class="small" data-storage-key="weekly-check" placeholder="Reconcile accounts, move pot top-ups, adjust envelopes"></textarea>
+      </article>
+    </section>
+
+    <section class="box" style="margin-top:24px;">
+      <h2>Savings Pots (Monthly Contributions)</h2>
+      <p>Set aside a monthly amount toward future known costs.</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Pot</th><th>Monthly set aside</th><th>Target / due</th></tr></thead>
+            <tbody>
+              <tr>
+              <td><input type="text" id="sinking-1-name" placeholder="Car maintenance" data-storage-key="sinking-1-name" /></td>
+              <td><input type="number" step="0.01" id="sinking-1-amount" data-storage-key="sinking-1-amount" /></td>
+              <td><input type="text" id="sinking-1-target" placeholder="£600 by Sep" data-storage-key="sinking-1-target" /></td>
+              </tr>
+            <tr>
+              <td><input type="text" id="sinking-2-name" placeholder="Holidays / travel" data-storage-key="sinking-2-name" /></td>
+              <td><input type="number" step="0.01" id="sinking-2-amount" data-storage-key="sinking-2-amount" /></td>
+              <td><input type="text" id="sinking-2-target" data-storage-key="sinking-2-target" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="sinking-3-name" placeholder="Gifts / events" data-storage-key="sinking-3-name" /></td>
+              <td><input type="number" step="0.01" id="sinking-3-amount" data-storage-key="sinking-3-amount" /></td>
+              <td><input type="text" id="sinking-3-target" data-storage-key="sinking-3-target" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="sinking-4-name" placeholder="Tech / home upgrades" data-storage-key="sinking-4-name" /></td>
+              <td><input type="number" step="0.01" id="sinking-4-amount" data-storage-key="sinking-4-amount" /></td>
+              <td><input type="text" id="sinking-4-target" data-storage-key="sinking-4-target" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="sinking-5-name" placeholder="Education / courses" data-storage-key="sinking-5-name" /></td>
+              <td><input type="number" step="0.01" id="sinking-5-amount" data-storage-key="sinking-5-amount" /></td>
+              <td><input type="text" id="sinking-5-target" data-storage-key="sinking-5-target" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="grid" style="margin-top:24px;">
+      <article class="box">
+        <h2>Yearly Reflection</h2>
+        <p>How will you know this year’s money plan is working?</p>
+        <label class="label" for="money-wins">What good will look like</label>
+        <textarea id="money-wins" class="small" data-storage-key="money-wins"></textarea>
+        <label class="label" for="money-risks">Risks to watch</label>
+        <textarea id="money-risks" class="small" data-storage-key="money-risks"></textarea>
+      </article>
+    </section>
+
+    <footer>© 2025 Work Wise ADHD · Yearly Budget Planner.</footer>
+  </main>
+
+  <script>
+  (() => {
+    const storagePrefix = 'workwise-adhd:yearly-budget:';
+    let storage;
+    try {
+      storage = window.localStorage;
+    } catch (err) {
+      return;
+    }
+    if (!storage) return;
+
+    const fields = document.querySelectorAll('input[type="text"], input[type="number"], textarea, select');
+    fields.forEach((field, index) => {
+      const key = storagePrefix + (field.dataset.storageKey || field.id || field.name || index);
+      const saved = storage.getItem(key);
+      if (saved !== null) field.value = saved;
+      const save = () => storage.setItem(key, field.value);
+      field.addEventListener('input', save);
+      field.addEventListener('change', save);
+    });
+
+    const clearBtn = document.getElementById('clear-storage-btn');
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        if (!confirm('Clear all saved text for this planner?')) return;
+        fields.forEach((field, index) => {
+          const key = storagePrefix + (field.dataset.storageKey || field.id || field.name || index);
+          storage.removeItem(key);
+          if (field.tagName === 'SELECT') field.selectedIndex = 0;
+          else field.value = '';
+        });
+      });
+    }
+  })();
+  </script>
+</body>
+</html>
